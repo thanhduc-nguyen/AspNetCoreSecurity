@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCoreSecurity", "AspNetCoreSecurity\AspNetCoreSecurity.csproj", "{1FD78679-0FDD-4683-9829-2261F516C700}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1FD78679-0FDD-4683-9829-2261F516C700}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FD78679-0FDD-4683-9829-2261F516C700}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FD78679-0FDD-4683-9829-2261F516C700}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FD78679-0FDD-4683-9829-2261F516C700}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {688B5F76-3E16-409C-BFD7-FDE2D12B42AD}
+	EndGlobalSection
+EndGlobal
