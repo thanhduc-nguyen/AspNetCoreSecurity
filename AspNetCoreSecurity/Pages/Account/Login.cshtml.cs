@@ -33,7 +33,8 @@ namespace AspNetCoreSecurity.Pages.Account
                     new Claim(ClaimTypes.Email, "admin@email.com"),
                     new Claim("Department", "HR"),
                     new Claim("Admin", "true"),
-                    new Claim("HRManager", "true")
+                    new Claim("HRManager", "true"),
+                    new Claim("EmploymentDate", "2024-01-25"),
                 };
 
                 var identity = new ClaimsIdentity(claims, "MyCookieAuthentication");

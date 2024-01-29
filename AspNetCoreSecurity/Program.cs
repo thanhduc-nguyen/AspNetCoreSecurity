@@ -1,4 +1,5 @@
 using AspNetCoreSecurity.Authorization;
+using Microsoft.AspNetCore.Authorization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,14 +10,17 @@ builder.Services.AddAuthentication().AddCookie("MyCookieAuthentication", options
     options.Cookie.Name = "MyCookieAuthentication";
     options.LoginPath = "/Account/Login"; // Default value, can omit
     options.AccessDeniedPath = "/Account/NoPermission"; // Default value: Account/AccessDenided
+    options.ExpireTimeSpan = TimeSpan.FromSeconds(30);
 });
 
 builder.Services.AddAuthorization(options =>
 {
     options.AddPolicy("MustBelongToHRDepartment", policy => policy.RequireClaim("Department", "HR"));
     options.AddPolicy("AdminOnly", policy => policy.RequireClaim("Admin"));
-    options.AddPolicy("HRManagerOnly", policy => policy.RequireClaim("Department", "HR").RequireClaim("HRManager"));
+    options.AddPolicy("HRManagerOnly", policy => policy.RequireClaim("Department", "HR").RequireClaim("HRManager").Requirements.Add(new HRManagerProbationRequirement(3)));
 });
+
+builder.Services.AddSingleton<IAuthorizationHandler, HRManagerProbationRequirementHandler>();
 
 var app = builder.Build();
 
