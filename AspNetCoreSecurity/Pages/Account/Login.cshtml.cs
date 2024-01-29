@@ -40,8 +40,13 @@ namespace AspNetCoreSecurity.Pages.Account
                 var identity = new ClaimsIdentity(claims, "MyCookieAuthentication");
                 var claimsPrincipal = new ClaimsPrincipal(identity);
 
+                var authProperties = new AuthenticationProperties
+                {
+                    IsPersistent = Credential.RememberMe,
+                };
+
                 // Serialize the claims plincipal into a string and encrypt that string, save that as a cookie in the HttpContext
-                await HttpContext.SignInAsync("MyCookieAuthentication", claimsPrincipal);
+                await HttpContext.SignInAsync("MyCookieAuthentication", claimsPrincipal, authProperties);
 
                 return RedirectToPage("/Index");
             }
@@ -58,5 +63,8 @@ namespace AspNetCoreSecurity.Pages.Account
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        [Display(Name = "Remember Me")]
+        public bool RememberMe { get; set; }
     }
 }

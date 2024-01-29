@@ -10,7 +10,7 @@ builder.Services.AddAuthentication().AddCookie("MyCookieAuthentication", options
     options.Cookie.Name = "MyCookieAuthentication";
     options.LoginPath = "/Account/Login"; // Default value, can omit
     options.AccessDeniedPath = "/Account/NoPermission"; // Default value: Account/AccessDenided
-    options.ExpireTimeSpan = TimeSpan.FromSeconds(30);
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
 });
 
 builder.Services.AddAuthorization(options =>
