@@ -36,16 +36,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="d-flex">
-                    @if (User.Identity.IsAuthenticated)
-                    {
-                        <a class="nav-link text-dark" asp-area="" asp-page="/Logout">Logout</a>
-                    }
-                    else
-                    {
-                        <a class="nav-link text-dark" asp-area="" asp-page="/Account/Login">Login</a>
-                    }
-                </div>
+                <partial name="_LoginStatusPartial" />
             </div>
         </nav>
     </header>
