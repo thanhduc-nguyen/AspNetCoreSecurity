@@ -13,7 +13,7 @@ namespace AspNetCoreSecurity.Pages.Account
 
         public void OnGet()
         {
-            Credential = new Credential { Username = "admin" };
+
         }
 
         public async Task<IActionResult> OnPostAsync()
