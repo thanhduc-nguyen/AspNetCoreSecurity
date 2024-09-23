@@ -1,4 +1,5 @@
 using AspNetCoreSecurity.Authorization;
+using Microsoft.AspNetCore.Authentication.BearerToken;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
@@ -10,26 +11,28 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddAuthentication().AddCookie("MyCookieAuthentication", options =>
-{
-    options.Cookie.Name = "MyCookieAuthentication";
-    options.LoginPath = "/Account/Login"; // Default value, can omit
-    options.AccessDeniedPath = "/Account/NoPermission"; // Default value: Account/AccessDenided
-    options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-}).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
-{
-    options.TokenValidationParameters = new()
+builder.Services.AddAuthentication("MyCookieAuthentication")
+    .AddCookie("MyCookieAuthentication", options =>
     {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateIssuerSigningKey = true,
-        ValidIssuer = builder.Configuration["Authentication:Issuer"],
-        ValidAudience = builder.Configuration["Authentication:Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(
-            Encoding.ASCII.GetBytes(builder.Configuration["Authentication:SecretForKey"]))
-    };
-}
-); ;
+        options.Cookie.Name = "MyCookieAuthentication";
+        options.LoginPath = "/Account/Login"; // Default value, can omit
+        options.AccessDeniedPath = "/Account/NoPermission"; // Default value: Account/AccessDenided
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+    })
+    .AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
+    {
+        options.TokenValidationParameters = new()
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = builder.Configuration["Authentication:Issuer"],
+            ValidAudience = builder.Configuration["Authentication:Audience"],
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.ASCII.GetBytes(builder.Configuration["Authentication:SecretForKey"]))
+        };
+    })
+    .AddBearerToken(BearerTokenDefaults.AuthenticationScheme);
 
 builder.Services.AddAuthorization(options =>
 {
